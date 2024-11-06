@@ -1,5 +1,5 @@
 const url = "/api/cars/";
-import { CarDocument, CarDocumentForUpdate } from '@/app/api/cars/route'
+import { CarDocument, CarDocumentForUpdate } from '@/types/car/car'
 
 export const getAllCars = async () => {
     try {

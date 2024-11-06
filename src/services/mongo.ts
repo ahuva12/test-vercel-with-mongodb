@@ -21,12 +21,13 @@ export async function getAllDocuments(client: any, collection: string) {
     const documents = await db.collection(collection).find().toArray();
     return documents;
 }
- 
+
 export async function insertDocument(client: any, collection: string, document: object) {
     const db = client.db('db01');
     const result = await db.collection(collection).insertOne(document);
-    return result;
+    return { _id: result.insertedId };
 }
+
 
 export async function deleteDocument(client: any, collection: string, filter: object) {
     const db = client.db('db01');

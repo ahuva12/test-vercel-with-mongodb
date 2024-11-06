@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { connectDatabase, deleteDocument, updateDocument } from '@/services/mongo';
 import { ObjectId } from 'mongodb';
-import { CarDocument } from '@/app/api/cars/route'
+import { CarDocument } from '@/types/car/car';
 
 export async function DELETE(req: Request, { params }: { params: Promise<{ carId: string }> }) {
     try {

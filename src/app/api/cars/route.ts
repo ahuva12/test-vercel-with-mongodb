@@ -1,20 +1,7 @@
 "use server";
 import { connectDatabase, getAllDocuments, insertDocument } from "@/services/mongo";
 import { NextResponse } from "next/server";
-
-export interface CarDocument {
-    _id?: string
-    model: string;
-    color: string; 
-    price: number;
-}
-
-export interface CarDocumentForUpdate {
-    _id: string
-    model?: string;
-    color?: string; 
-    price?: number;
-}
+import { CarDocument } from "@/types/car/car";
 
 export async function GET(request: Request) {
     const client = await connectDatabase();
@@ -29,11 +16,9 @@ export async function POST(req: Request) {
         const client = await connectDatabase();
         const res = await insertDocument(client, 'cars', body);
 
-        return NextResponse.json(res);
-
+        return NextResponse.json({ _id: res._id });
     } catch (error) {
         console.error("Error processing request:", error);
         return NextResponse.json({ error: "Failed to insert document" }, { status: 500 });
     }
 }
-
