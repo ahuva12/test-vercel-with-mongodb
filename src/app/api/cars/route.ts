@@ -4,11 +4,21 @@ import { NextResponse } from "next/server";
 import { CarDocument } from "@/types/car/car";
 
 export async function GET(request: Request) {
-    const client = await connectDatabase();
-    const data = await getAllDocuments(client, 'cars');
+    try {
+        const client = await connectDatabase();
+        const data = await getAllDocuments(client, 'cars');
 
-    return NextResponse.json(data);
+        return NextResponse.json(data);
+
+    } catch (error) {
+        console.error('Error fetching documents:', error);
+        return NextResponse.json(
+            { message: 'Failed to fetch documents' },
+            { status: 500 }
+        );
+    }
 }
+
 
 export async function POST(req: Request) {
     try {
@@ -18,7 +28,7 @@ export async function POST(req: Request) {
 
         return NextResponse.json({ _id: res._id });
     } catch (error) {
-        console.error("Error processing request:", error);
+        console.error("Error post request:", error);
         return NextResponse.json({ error: "Failed to insert document" }, { status: 500 });
     }
 }

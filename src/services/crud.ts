@@ -13,6 +13,7 @@ export const getAllCars = async () => {
 
     } catch (error:any) {
         console.error(error.message);
+        throw new Error(error.message);
     }
 }
 
@@ -31,9 +32,11 @@ export const postCar = async (newCar:CarDocument) => {
             return result;
         } else {
             console.error("Error:", response.statusText);
+            throw new Error(`Response status: ${response.statusText}`);
         }
-    } catch (error) {
+    } catch (error:any) {
         console.error("Fetch error:", error);
+        throw new Error(error.message);
     }
 }
 
@@ -51,9 +54,11 @@ export const deleteCar = async (carId:string) => {
             return result;
         } else {
             console.error("Error:", response.statusText);
+            throw new Error(`Response status: ${response.statusText}`);
         }
-    } catch (error) {
+    } catch (error:any) {
         console.error("Fetch error:", error);
+        throw new Error(error.message);
     }
 }
 
@@ -72,9 +77,11 @@ export const updateCar = async (updateCar:CarDocumentForUpdate) => {
             return result;
         } else {
             console.error("Error:", response.statusText);
+            throw new Error(`Response status: ${response.statusText}`);
         }
-    } catch (error) {
+    } catch (error:any) {
         console.error("Fetch error:", error);
+        throw new Error(error.message);
     }
 }
 
